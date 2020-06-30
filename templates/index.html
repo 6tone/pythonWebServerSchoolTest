@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ch-tw">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Python期末測驗</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/cover/">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.3/examples/cover/cover.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <link href="https://getbootstrap.com/docs/4.3/examples/cover/cover.css" rel="stylesheet">
+  </head>
+  <body class="text-center" style="box-shadow: none;">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="masthead">
+    <div class="inner">
+      <h3 class="masthead-brand">Nav</h3>
+      <nav class="nav nav-masthead justify-content-center">
+        <a class="nav-link active" onclick="homePage()">Home</a>
+        <a class="nav-link" onclick="newsPage()">News</a>
+        <a class="nav-link" onclick="codePage()">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <main role="main" class="inner cover-container">
+    
+  </main>
+
+  <footer class="mastfoot mt-auto">
+    <div class="inner">
+      <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a></p>
+    </div>
+  </footer>
+</div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        homePage()
+        let resHtml = ''
+        axios.get(`http://localhost:5000/api/news`)
+            .then(
+                (res) => {
+                    console.log(res.data)
+                    res.data.map((item, index) => {
+                        resHtml += `<div class="media position-relative">
+                                        <img src="../static/pythonIcon.jpg" class="mr-3" alt="test">
+                                        <div class="media-body">
+                                            <h5 class="mt-0">${item[0]}</h5>
+                                            <a href="${item[1]}" class="stretched-link">Go check</a>
+                                        </div>
+                                    </div>`
+                    })
+                }
+            )
+
+        function newsPage(){
+            navActive(1)
+            document.querySelector("main").innerHTML = `<div><h1 class="cover-heading">Yahoo新聞爬蟲</h1>${resHtml}</div>`
+        }
+        function homePage(){
+            let honeContain = `<h1 class="cover-heading">Python期末測驗</h1>
+    <p class="lead">90718137田宗龍<br>Python期末測驗用簡易webServer及簡單爬蟲練習</p>
+    `
+            navActive(0)
+            document.querySelector("main").innerHTML = honeContain
+        }
+
+        function navActive(e){
+            let nav = document.querySelectorAll(".nav-link")
+            nav.forEach((item)=>{
+                item.classList.remove("active")
+            })
+            nav[e].classList.add("active")
+        }
+
+        function codePage(){
+            navActive(2)
+            document.querySelector("main").innerHTML = 
+        }
+    </script>
+</body>
+</html>
+
+
+
+
