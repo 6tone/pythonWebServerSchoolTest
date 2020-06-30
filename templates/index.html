@@ -41,6 +41,7 @@
                 <nav class="nav nav-masthead justify-content-center">
                     <a class="nav-link active" onclick="homePage()">Home</a>
                     <a class="nav-link" onclick="newsPage()">News</a>
+                    <a class="nav-link" onclick="hboPage()">HBO</a>
                     <a class="nav-link" onclick="codePage()">Code</a>
                 </nav>
             </div>
@@ -64,10 +65,10 @@
         document.querySelector("#gist104049082").style.display = "none"
         homePage()
         let resHtml = ''
+        let resForm = ''
         axios.get(`http://localhost:5000/api/news`)
             .then(
                 (res) => {
-                    console.log(res.data)
                     res.data.map((item, index) => {
                         resHtml += `<div class="media position-relative">
                                         <img src="../static/pythonIcon.jpg" class="mr-3" alt="test">
@@ -79,6 +80,17 @@
                     })
                 }
             )
+        axios.get(`http://localhost:5000/api/hbo`)
+        .then((res) => {
+            for(let temp in res.data){
+                resForm += `
+                <tr>
+                    <td>${res.data[temp].time}</td>
+                    <td>${res.data[temp].title}</td>
+                </tr>`
+                res.data[temp].title
+            }
+        })
 
         function navActive(e){
             let nav = document.querySelectorAll(".nav-link")
@@ -101,13 +113,32 @@
             document.querySelector("main").innerHTML = `<div><h1 class="cover-heading">Yahoo新聞爬蟲</h1>${resHtml}</div>`
         }
 
-        function codePage(){
+        function hboPage(){
             navActive(2)
+            document.querySelector("main").innerHTML = `
+            <h1 class="cover-heading">HBO今日節目表爬蟲練習</h1>
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                        <th scope="col">時間</th>
+                        <th scope="col">名稱</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${resForm}
+                    </tbody>
+                </table>`
+        }
+
+        function codePage(){
+            navActive(3)
             document.querySelector("main").innerHTML = `<div>
                 <h1 class="cover-heading">Python Server程式碼</h1>
                 </div>`
             document.querySelector("#gist104049082").style.display = "block"
         }
+
+        
     </script>
 </body>
 </html>

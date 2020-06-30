@@ -1,17 +1,11 @@
-import requests
+from flask import Flask, render_template
 from bs4 import BeautifulSoup
+import requests
 import json
+import time
 
-
-res = requests.get('https://tw.yahoo.com/')
+my_params = {'date': time.strftime("%Y-%m-%d", time.localtime()), 'channel': 'hbo', 'feed': 'tw'}
+res = requests.get('https://hboasia.com/HBO/zh-tw/ajax/home_schedule', my_params)
 if res.status_code == requests.codes.ok:
-  soup = BeautifulSoup(res.text, 'html.parser')
-  stories = soup.find_all('a', class_='story-title')
-  data = []
-  for item in stories:
-    data.append(json.dumps([item.text, item.get('href')])
-
-  print(json.loads(data))
-
-
-
+    print(json.dumps(res.text))
+    
