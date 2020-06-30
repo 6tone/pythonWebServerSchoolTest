@@ -7,7 +7,6 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
     <title>Python期末測驗</title>
-
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/cover/">
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -35,29 +34,34 @@
   </head>
   <body class="text-center" style="box-shadow: none;">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="masthead">
-    <div class="inner">
-      <h3 class="masthead-brand">Nav</h3>
-      <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link active" onclick="homePage()">Home</a>
-        <a class="nav-link" onclick="newsPage()">News</a>
-        <a class="nav-link" onclick="codePage()">Code</a>
-      </nav>
-    </div>
-  </header>
 
-  <main role="main" class="inner cover-container">
+        <header class="masthead">
+            <div class="inner">
+                <h3 class="masthead-brand">Nav</h3>
+                <nav class="nav nav-masthead justify-content-center">
+                    <a class="nav-link active" onclick="homePage()">Home</a>
+                    <a class="nav-link" onclick="newsPage()">News</a>
+                    <a class="nav-link" onclick="codePage()">Code</a>
+                </nav>
+            </div>
+        </header>
+
+        <main role="main" class="inner cover-container">
+            
+        </main>
+        
+        <script src="https://gist.github.com/6tone/8b5598642029173fc6288f79c0a3a3a7.js"></script>
+        <footer class="mastfoot mt-auto">
+            <div class="inner">
+            <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a></p>
+            </div>
+        </footer>
+
+    </div>
     
-  </main>
-
-  <footer class="mastfoot mt-auto">
-    <div class="inner">
-      <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a></p>
-    </div>
-  </footer>
-</div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
+        document.querySelector("#gist104049082").style.display = "none"
         homePage()
         let resHtml = ''
         axios.get(`http://localhost:5000/api/news`)
@@ -76,34 +80,34 @@
                 }
             )
 
-        function newsPage(){
-            navActive(1)
-            document.querySelector("main").innerHTML = `<div><h1 class="cover-heading">Yahoo新聞爬蟲</h1>${resHtml}</div>`
-        }
-        function homePage(){
-            let honeContain = `<h1 class="cover-heading">Python期末測驗</h1>
-    <p class="lead">90718137田宗龍<br>Python期末測驗用簡易webServer及簡單爬蟲練習</p>
-    `
-            navActive(0)
-            document.querySelector("main").innerHTML = honeContain
-        }
-
         function navActive(e){
             let nav = document.querySelectorAll(".nav-link")
             nav.forEach((item)=>{
                 item.classList.remove("active")
             })
             nav[e].classList.add("active")
+            document.querySelector("#gist104049082").style.display = "none"
+        }
+
+        function homePage(){
+            let honeContain = `<h1 class="cover-heading">Python期末測驗</h1>
+            <p class="lead">90718137田宗龍<br>Python期末測驗用簡易webServer及簡單爬蟲練習</p>`
+            navActive(0)
+            document.querySelector("main").innerHTML = honeContain
+        }
+
+        function newsPage(){
+            navActive(1)
+            document.querySelector("main").innerHTML = `<div><h1 class="cover-heading">Yahoo新聞爬蟲</h1>${resHtml}</div>`
         }
 
         function codePage(){
             navActive(2)
-            document.querySelector("main").innerHTML = 
+            document.querySelector("main").innerHTML = `<div>
+                <h1 class="cover-heading">Python Server程式碼</h1>
+                </div>`
+            document.querySelector("#gist104049082").style.display = "block"
         }
     </script>
 </body>
 </html>
-
-
-
-
