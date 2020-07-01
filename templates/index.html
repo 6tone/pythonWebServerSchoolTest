@@ -70,10 +70,12 @@
             .then(
                 (res) => {
                     res.data.map((item, index) => {
-                        resHtml += `<div class="media position-relative">
+                        
+                        resHtml += `<div class="media position-relative mt-3 mb-3">
                                         <img src="../static/pythonIcon.jpg" class="mr-3" alt="test">
                                         <div class="media-body">
-                                            <h5 class="mt-0">${item[0]}</h5>
+                                            <h5 class="mt-0 text-primary">${item[0]}</h5>
+                                            <p >${item[2]}</p>
                                             <a href="${item[1]}" class="stretched-link">Go check</a>
                                         </div>
                                     </div>`

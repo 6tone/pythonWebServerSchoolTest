@@ -14,10 +14,12 @@ def news():
     res = requests.get('https://tw.yahoo.com/')
     if res.status_code == requests.codes.ok:
         soup = BeautifulSoup(res.text, 'html.parser')
-        stories = soup.find_all('a', class_='story-title')
-        data = []
+        stories = soup.find_all('li', class_='Story-Item')
+        data = []        
         for item in stories:
-            data.append([item.text, item.get('href')])
+            if item.find('a', class_='story-title') :
+                print()
+                data.append([item.find('a', class_='story-title').text, item.find('a', class_='story-title').get('href'), item.find('p').text])
         return json.dumps(data)
         
 @app.route('/api/hbo')
